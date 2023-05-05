@@ -24,12 +24,12 @@ const sendData = (onSuccess, onFail, body) => {
     })
     .then((response) => {
       if (!response.ok) {
-        throw '';
+        throw 'Bad response';
       }
       onSuccess();
     })
-    .catch(() => {
-      onFail();
+    .catch((err) => {
+      onFail(err);
     });
 };
 

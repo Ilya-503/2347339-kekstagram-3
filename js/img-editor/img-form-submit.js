@@ -3,6 +3,7 @@ import { sendData } from '../api.js';
 import { closeImgEditor } from './img-editor.js';
 import { createMsgElem } from '../show-message.js';
 import { createBtnBlocker } from '../utils.js';
+import { Message } from '../msg.js';
 
 const submitBtnBlocker = createBtnBlocker('#upload-submit', 'Отправляю...', 'Отправить');
 const imgFormElem = document.querySelector('.img-upload__form');
@@ -19,13 +20,14 @@ function onSubmitBtnClick(evt) {
       submitBtnBlocker.block();
       const body = new FormData(imgFormElem);
       body.append('filename', imgFile);
-      sendData(showSuccess, showError, body);    // add block user u
+      sendData(showSuccess, console.log, body);    // add block user u
       document.addEventListener('click', onSendingData, true);
     });
 }
 
 function showSuccess() {
-  const successMsgElem = createMsgElem('#success', '.success', document.body, '.success__button', '.success__inner');
+  //const successMsgElem = createMsgElem('#success', '.success', document.body, '.success__button', '.success__inner');
+  const successMsgElem = new Message('#success', '.success', document.body, '.success__button', '.success__inner');
   successMsgElem.show();
   submitBtnBlocker.unblock();
   closeImgEditor();
